@@ -43,7 +43,7 @@ export function buildLoaders({ isDev }: BuildOptions): webpack.RuleSetRule[] {
     }
 
     const babelLoader = {
-        test: /\.(js|jsx|ts|tsx$/,
+        test: /\.(js|jsx|tsx)$/,
         exclude: /node_modules/,
         use: {
             loader: "babel-loader",
@@ -53,5 +53,5 @@ export function buildLoaders({ isDev }: BuildOptions): webpack.RuleSetRule[] {
         },
     }
 
-    return [typescriptLoader, cssLoader, fileLoader, svgLoader, babelLoader]
+    return [fileLoader, svgLoader, babelLoader, typescriptLoader, cssLoader]
 }
