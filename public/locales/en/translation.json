@@ -2,5 +2,8 @@
     "перевод": "translate",
     "перевод кнопка": "translate button",
     "Язык": "Language",
-    "загрузка": "Loading..."
+    "загрузка": "Loading...",
+    "ошибка": "Something went wrong...",
+    "resetPage": "Reset the page",
+    "sidebarToggle": "Sidebar Toggle"
 }
