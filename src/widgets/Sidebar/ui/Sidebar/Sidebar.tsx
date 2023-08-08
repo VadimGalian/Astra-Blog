@@ -17,8 +17,13 @@ export function Sidebar({ className }: ISidebarProps) {
         setCollapsed(prev => !prev)
     }
     return (
-        <div className={classNames(cls.container, { [cls.collapsed]: collapsed }, [className])}>
-            <button onClick={onToggle}>{t("sidebarToggle")}</button>
+        <div
+            data-testid="sidebar"
+            className={classNames(cls.container, { [cls.collapsed]: collapsed }, [className])}
+        >
+            <button data-testid="sidebar-toggle" onClick={onToggle}>
+                {t("sidebarToggle")}
+            </button>
             <div className={cls.switchers}>
                 <ThemeSwitcher />
                 <LangSwitcher className={cls.lang} />
