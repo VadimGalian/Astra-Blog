@@ -1,5 +1,8 @@
 {
+  "aboutPage": "aboutPage",
+  "mainPage": "mainPage",
   "resetPage": "resetPage",
+  "sidebarToggle": "sidebarToggle",
   "Язык": "",
   "главная страница": "",
   "загрузка": "загрузка",
