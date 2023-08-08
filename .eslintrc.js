@@ -79,7 +79,7 @@ module.exports = {
             },
         ],
         "no-control-regex": 0,
-        "i18next/no-literal-string": ["error", { markupOnly: true }],
+        "i18next/no-literal-string": ["error", { markupOnly: true, onlyAttribute: [""] }],
     },
     globals: {
         __IS_DEV__: true,
