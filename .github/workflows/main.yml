@@ -1,30 +1,45 @@
 name: linting, testing, building
+
 on:
   push:
-    branches: ${{ github.ref_name }} 
+    branches:
+      - ${{ github.ref_name }}
   pull_request:
-    branches: [ develop ]
+    branches:
+      - develop
+
 jobs:
   pipeline:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [ 17.x ]
+        node-version: [17.x]
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Staring Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up environment
+        run: |
+          BRANCH_NAME=${GITHUB_REF##*/}
+          echo "Current branch: $BRANCH_NAME"
+
+      - name: Starting Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-      - name: install modules
+
+      - name: Install modules
         run: npm install
-      - name: build production project
+
+      - name: Build production project
         run: npm run build:prod
-      - name: linting typescript
+
+      - name: Linting TypeScript
         run: npm run lint:ts
-      - name: linting css
+
+      - name: Linting CSS
         run: npm run lint:scss
-      - name: unit testing
+
+      - name: Unit testing
         run: npm run test:unit
-     
