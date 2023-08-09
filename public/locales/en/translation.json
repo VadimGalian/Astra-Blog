@@ -1,9 +1,11 @@
 {
     "перевод": "translate",
     "перевод кнопка": "translate button",
-    "Язык": "Language",
+    "language": "English",
+    "lang": "Eng",
     "загрузка": "Loading...",
     "ошибка": "Something went wrong...",
     "resetPage": "Reset the page",
-    "sidebarToggle": "Sidebar Toggle"
+    "mainPage": "Main",
+    "aboutPage": "About"
 }
