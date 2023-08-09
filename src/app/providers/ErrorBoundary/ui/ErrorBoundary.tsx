@@ -32,7 +32,8 @@ export default class ErrorBoundary extends React.Component<
 
         if (hasError) {
             return (
-                <Suspense fallback="">
+                // eslint-disable-next-line i18next/no-literal-string
+                <Suspense fallback={<div>Loading...</div>}>
                     <PageError />
                 </Suspense>
             )
