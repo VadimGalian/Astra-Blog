@@ -1,9 +1,20 @@
-import { useTranslation } from "react-i18next"
+import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Input } from 'shared/ui/Input/Input';
 
 const MainPage = () => {
-    const { t } = useTranslation()
+    const { t } = useTranslation();
+    const [value, setValue] = useState('');
 
-    return <div>{t("Главная страница")}</div>
-}
+    const onChange = (val: string) => {
+        setValue(val);
+    };
 
-export default MainPage
+    return (
+        <div>
+            {t('Главная страница')}
+        </div>
+    );
+};
+
+export default MainPage;
