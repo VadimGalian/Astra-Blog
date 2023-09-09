@@ -1,10 +1,12 @@
 import {
     ProfileCard,
+    ValidateProfileError,
     fetchProfileData,
     getProfileError,
     getProfileForm,
     getProfileIsLoading,
     getProfileReadonly,
+    getProfileValidateErrors,
     profileActions,
     profileReducer,
 } from "entities/Profile"
@@ -17,6 +19,8 @@ import {
     ReducersList,
 } from "shared/lib/components/DynamicModuleLoader/DynamicModuleLoader"
 import { useAppDispatch } from "shared/lib/hooks/useAppDispatch/useAppDispatch"
+import { Text, TextTheme } from "shared/ui/Text/Text"
+import { useTranslation } from "react-i18next"
 import { ProfilePageHeader } from "./ProfilePageHeader/ProfilePageHeader"
 
 const reducers: ReducersList = {
@@ -24,11 +28,20 @@ const reducers: ReducersList = {
 }
 
 function ProfilePage() {
+    const { t } = useTranslation("prodile")
     const dispatch = useAppDispatch()
     const fromData = useSelector(getProfileForm)
     const isLoading = useSelector(getProfileIsLoading)
     const error = useSelector(getProfileError)
     const readonly = useSelector(getProfileReadonly)
+    const validateErrors = useSelector(getProfileValidateErrors)
+    const validateErrorsTranslate = {
+        [ValidateProfileError.SERVER_ERROR]: t("server"),
+        [ValidateProfileError.INCORRECT_COUNTRY]: t("incorrectCountry"),
+        [ValidateProfileError.NO_DATA]: t("noData"),
+        [ValidateProfileError.INCORRECT_USER_DATA]: t("incorrectUserData"),
+        [ValidateProfileError.INCORRECT_AGE]: t("incorrectAge"),
+    }
 
     useEffect(() => {
         dispatch(fetchProfileData())
@@ -93,6 +106,14 @@ function ProfilePage() {
         <DynamicModuleLoader reducers={reducers} removeAfterUnmount>
             <div>
                 <ProfilePageHeader />
+                {validateErrors?.length &&
+                    validateErrors.map(err => (
+                        <Text
+                            key={err}
+                            theme={TextTheme.ERROR}
+                            text={validateErrorsTranslate[err]}
+                        />
+                    ))}
                 <ProfileCard
                     data={fromData}
                     error={error}
