@@ -5,7 +5,12 @@
     }
   },
   "decrement": "decrement",
+  "incorrectAge": "incorrectAge",
+  "incorrectCountry": "incorrectCountry",
+  "incorrectUserData": "incorrectUserData",
   "increment": "increment",
+  "noData": "noData",
+  "server": "server",
   "throw error": "throw error",
   "Введите username": "Введите username",
   "Введите пароль": "Введите пароль",
