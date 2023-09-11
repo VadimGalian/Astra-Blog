@@ -1,31 +1,40 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react"
-import { Country } from "entities/Country"
-import { ProfileCard } from "./ProfileCard"
+import React from 'react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { ProfileCard } from 'entities/Profile';
+import { Country } from 'entities/Country';
+import { Currency } from 'entities/Currency';
+import avatar from 'shared/assets/tests/storybook.jpg';
 
 export default {
-    title: "entities/ProfileCard",
+    title: 'entities/ProfileCard',
     component: ProfileCard,
     argTypes: {
-        backgroundColor: { control: "color" },
+        backgroundColor: { control: 'color' },
     },
-} as ComponentMeta<typeof ProfileCard>
+} as ComponentMeta<typeof ProfileCard>;
 
-const Template: ComponentStory<typeof ProfileCard> = args => <ProfileCard {...args} />
+const Template: ComponentStory<typeof ProfileCard> = (args) => <ProfileCard {...args} />;
 
-export const Primary = Template.bind({})
+export const Primary = Template.bind({});
 Primary.args = {
     data: {
-        username: "admin",
+        username: 'admin',
         age: 22,
         country: Country.Ukraine,
-        lastname: "Vasilich",
-        first: "Bulkin",
-        avatar: "",
+        lastname: 'ulbi tv',
+        first: 'asd',
+        city: 'asf',
+        currency: Currency.USD,
+        avatar,
     },
-}
+};
 
-export const withError = Template.bind({})
-withError.args = {}
+export const withError = Template.bind({});
+withError.args = {
+    error: 'true',
+};
 
-export const Loading = Template.bind({})
-Loading.args = {}
+export const Loading = Template.bind({});
+Loading.args = {
+    isLoading: true,
+};
