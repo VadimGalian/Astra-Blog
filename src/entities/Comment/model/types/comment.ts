@@ -1,7 +1,7 @@
-import { User } from "entities/User"
+import { User } from 'entities/User';
 
-export interface IComment {
-    id: string
-    user: User
-    text: string
+export interface Comment {
+    id: string;
+    user: User;
+    text: string;
 }
