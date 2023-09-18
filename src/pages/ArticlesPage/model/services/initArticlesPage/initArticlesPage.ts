@@ -1,37 +1,42 @@
-import { createAsyncThunk } from "@reduxjs/toolkit"
-import { ArticleSortField } from "entities/Article"
-import { SortOrder } from "shared/types"
-import { ThunkConfig } from "app/providers/StoreProvider"
-import { getArticlesPageInited } from "../../selectors/articlesPageSelectors"
-import { articlesPageActions } from "../../slices/articlesPageSlice"
-import { fetchArticlesList } from "../fetchArticlesList/fetchArticlesList"
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import { ThunkConfig } from 'app/providers/StoreProvider';
+import { ArticleSortField, ArticleType } from 'entities/Article';
+import { SortOrder } from 'shared/types';
+import { getArticlesPageInited } from '../../selectors/articlesPageSelectors';
+import { articlesPageActions } from '../../slices/articlesPageSlice';
+import { fetchArticlesList } from '../fetchArticlesList/fetchArticlesList';
 
-export const initArticlesPage = createAsyncThunk<void, URLSearchParams, ThunkConfig<string>>(
-    "articlesPage/initArticlesPage",
-    async (searchParams, thunkApi) => {
-        const { getState, dispatch } = thunkApi
+export const initArticlesPage = createAsyncThunk<
+    void,
+    URLSearchParams,
+    ThunkConfig<string>
+    >(
+        'articlesPage/initArticlesPage',
+        async (searchParams, thunkApi) => {
+            const { getState, dispatch } = thunkApi;
+            const inited = getArticlesPageInited(getState());
 
-        const inited = getArticlesPageInited(getState())
+            if (!inited) {
+                const orderFromUrl = searchParams.get('order') as SortOrder;
+                const sortFromUrl = searchParams.get('sort') as ArticleSortField;
+                const searchFromUrl = searchParams.get('search');
+                const typeFromUrl = searchParams.get('type') as ArticleType;
 
-        if (!inited) {
-            const orderFormUrl = searchParams.get("order") as SortOrder
-            const sortFormUrl = searchParams.get("sort") as ArticleSortField
-            const searchFormUrl = searchParams.get("search")
+                if (orderFromUrl) {
+                    dispatch(articlesPageActions.setOrder(orderFromUrl));
+                }
+                if (sortFromUrl) {
+                    dispatch(articlesPageActions.setSort(sortFromUrl));
+                }
+                if (searchFromUrl) {
+                    dispatch(articlesPageActions.setSearch(searchFromUrl));
+                }
+                if (typeFromUrl) {
+                    dispatch(articlesPageActions.setType(typeFromUrl));
+                }
 
-            if (orderFormUrl) {
-                dispatch(articlesPageActions.setOrder(orderFormUrl))
+                dispatch(articlesPageActions.initState());
+                dispatch(fetchArticlesList({}));
             }
-
-            if (sortFormUrl) {
-                dispatch(articlesPageActions.setSort(sortFormUrl))
-            }
-
-            if (searchFormUrl) {
-                dispatch(articlesPageActions.setSearch(searchFormUrl))
-            }
-
-            dispatch(articlesPageActions.initState())
-            dispatch(fetchArticlesList({}))
-        }
-    }
-)
+        },
+    );
