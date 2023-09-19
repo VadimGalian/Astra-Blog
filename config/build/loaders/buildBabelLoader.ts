@@ -1,24 +1,24 @@
-import { BuildOptions } from "../types/config"
+import { BuildOptions } from '../types/config';
 
 export function buildBabelLoader({ isDev }: BuildOptions) {
     return {
         test: /\.(js|jsx|tsx)$/,
         exclude: /node_modules/,
         use: {
-            loader: "babel-loader",
+            loader: 'babel-loader',
             options: {
-                presets: ["@babel/preset-env"],
+                presets: ['@babel/preset-env'],
                 plugins: [
                     [
-                        "i18next-extract",
+                        'i18next-extract',
                         {
-                            locales: ["ru", "en"],
+                            locales: ['ru', 'en'],
                             keyAsDefaultValue: true,
                         },
                     ],
-                    isDev && require.resolve("react-refresh/babel"),
+                    isDev && require.resolve('react-refresh/babel'),
                 ].filter(Boolean),
             },
         },
-    }
+    };
 }

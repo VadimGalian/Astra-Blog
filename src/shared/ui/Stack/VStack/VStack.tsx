@@ -1,9 +1,10 @@
-import { Flex, IFlexProps } from "../Flex/Flex"
+import { Flex, FlexProps } from '../Flex/Flex';
 
-type IVStackProps = Omit<IFlexProps, "direction">
+type VStackProps = Omit<FlexProps, 'direction'>
 
-export function VStack(props: IVStackProps) {
-    const { align = "start" } = props
-
-    return <Flex direction="column" align={align} {...props} />
-}
+export const VStack = (props: VStackProps) => {
+    const { align = 'start' } = props;
+    return (
+        <Flex {...props} direction="column" align={align} />
+    );
+};

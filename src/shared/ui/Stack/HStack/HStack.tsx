@@ -1,9 +1,9 @@
-import { classNames } from "shared/lib/classNames/classNames"
-import cls from "./HStack.module.scss"
-import { Flex, IFlexProps } from "../Flex/Flex"
+import { Flex, FlexProps } from '../Flex/Flex';
 
-type HStackProps = Omit<IFlexProps, "direction">
+type HStackProps = Omit<FlexProps, 'direction'>
 
-export function HStack(props: HStackProps) {
-    return <Flex direction="row" {...props} />
-}
+export const HStack = (props: HStackProps) => {
+    return (
+        <Flex direction="row" {...props} />
+    );
+};
