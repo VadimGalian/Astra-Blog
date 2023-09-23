@@ -1,22 +1,22 @@
-import { classNames } from 'shared/lib/classNames/classNames';
-import { memo } from 'react';
-import { Avatar } from 'shared/ui/Avatar/Avatar';
-import { Text } from 'shared/ui/Text/Text';
-import { Skeleton } from 'shared/ui/Skeleton/Skeleton';
-import { AppLink } from 'shared/ui/AppLink/AppLink';
-import { RoutePath } from 'shared/config/routeConfig/routeConfig';
-import { VStack } from 'shared/ui/Stack';
-import cls from './CommentCard.module.scss';
-import { Comment } from '../../model/types/comment';
+import { classNames } from "shared/lib/classNames/classNames"
+import { memo } from "react"
+import { Avatar } from "shared/ui/Avatar/Avatar"
+import { Text } from "shared/ui/Text/Text"
+import { Skeleton } from "shared/ui/Skeleton/Skeleton"
+import { AppLink } from "shared/ui/AppLink/AppLink"
+import { RoutePath } from "shared/config/routeConfig/routeConfig"
+import { VStack } from "shared/ui/Stack"
+import cls from "./CommentCard.module.scss"
+import { Comment } from "../../model/types/comment"
 
 interface CommentCardProps {
-    className?: string;
-    comment?: Comment;
-    isLoading?: boolean;
+    className?: string
+    comment?: Comment
+    isLoading?: boolean
 }
 
 export const CommentCard = memo((props: CommentCardProps) => {
-    const { className, comment, isLoading } = props;
+    const { className, comment, isLoading } = props
 
     if (isLoading) {
         return (
@@ -27,11 +27,11 @@ export const CommentCard = memo((props: CommentCardProps) => {
                 </div>
                 <Skeleton className={cls.text} width="100%" height={50} />
             </div>
-        );
+        )
     }
 
     if (!comment) {
-        return null;
+        return null
     }
 
     return (
@@ -42,5 +42,5 @@ export const CommentCard = memo((props: CommentCardProps) => {
             </AppLink>
             <Text className={cls.text} text={comment.text} />
         </VStack>
-    );
-});
+    )
+})
