@@ -1,31 +1,34 @@
-import { classNames } from "shared/lib/classNames/classNames"
-import { AppLink } from "shared/ui/AppLink/AppLink"
-import { Text } from "shared/ui/Text/Text"
-import { Card, CardTheme } from "shared/ui/Card/Card"
-import cls from "./NotificationItem.module.scss"
-import { Notification } from "../../model/types/notifications"
+import { memo } from 'react';
+import { classNames } from '@/shared/lib/classNames/classNames';
+import { Card, CardTheme } from '@/shared/ui/Card/Card';
+import { Text } from '@/shared/ui/Text/Text';
+import cls from './NotificationItem.module.scss';
+import { Notification } from '../../model/types/notification';
 
-interface INotificationItemProps {
-    className?: string
+interface NotificationItemProps {
+    className?: string;
     item: Notification
 }
 
-export function NotificationItem(props: INotificationItemProps) {
-    const { className, item } = props
+export const NotificationItem = memo((props: NotificationItemProps) => {
+    const { className, item } = props;
 
     const content = (
-        <Card theme={CardTheme.OUTLINED} className={classNames(cls.container, {}, [className])}>
+        <Card
+            theme={CardTheme.OUTLINED}
+            className={classNames(cls.NotificationItem, {}, [className])}
+        >
             <Text title={item.title} text={item.description} />
         </Card>
-    )
+    );
 
     if (item.href) {
         return (
-            <AppLink className={cls.link} to={item.href}>
+            <a className={cls.link} target="_blank" href={item.href} rel="noreferrer">
                 {content}
-            </AppLink>
-        )
+            </a>
+        );
     }
 
-    return content
-}
+    return content;
+});
