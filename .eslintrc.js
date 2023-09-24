@@ -4,7 +4,13 @@ module.exports = {
         es2021: true,
         jest: true,
     },
-    extends: ["plugin:react/recommended", "airbnb"],
+    extends: [
+        "plugin:react/recommended",
+        "airbnb",
+        "plugin:i18next/recommended",
+        "plugin:storybook/recommended",
+        "prettier",
+    ],
     parser: "@typescript-eslint/parser",
     parserOptions: {
         ecmaFeatures: {
@@ -13,18 +19,23 @@ module.exports = {
         ecmaVersion: "latest",
         sourceType: "module",
     },
-    plugins: ["react", "@typescript-eslint", "react-hooks"],
+    plugins: [
+        "react",
+        "@typescript-eslint",
+        "i18next",
+        "react-hooks",
+        "ulbi-tv-plugin",
+        "unused-imports",
+    ],
     rules: {
-        "react/jsx-indent": [2, 4],
-        "react/jsx-indent-props": [2, 4],
-        indent: [
+        "unused-imports/no-unused-imports": "error",
+        "react/jsx-filename-extension": [
             2,
-            4,
             {
-                SwitchCase: 1,
+                extensions: [".js", ".jsx", ".tsx"],
             },
         ],
-        "react/jsx-filename-extension": [2, { extensions: [".js", ".jsx", ".tsx"] }],
+        camelcase: "off",
         "import/no-unresolved": "off",
         "import/prefer-default-export": "off",
         "no-unused-vars": "off",
@@ -32,52 +43,52 @@ module.exports = {
         "react/react-in-jsx-scope": "off",
         "react/jsx-props-no-spreading": "warn",
         "react/function-component-definition": "off",
-        "arrow-parens": ["error", "as-needed"],
         "no-shadow": "off",
         "import/extensions": "off",
         "import/no-extraneous-dependencies": "off",
         "no-underscore-dangle": "off",
-        "object-curly-newline": "off",
-        semi: ["error", "never"],
-        quotes: ["error", "double"],
-        "linebreak-style": "off",
-        "comma-dangle": [
+        "i18next/no-literal-string": "off",
+        "max-len": [
             "error",
             {
-                arrays: "always-multiline",
-                objects: "always-multiline",
-                imports: "always-multiline",
-                exports: "always-multiline",
-                functions: "never",
+                ignoreComments: true,
+                code: 125,
             },
         ],
-        "react/button-has-type": "off",
-        "operator-linebreak": [
-            "error",
-            "none",
-            { overrides: { "=": "after", "?": "before", ":": "before", "&&": "after" } },
-        ],
-        "max-len": ["error", { ignoreComments: true, code: 130 }],
         "jsx-a11y/no-static-element-interactions": "off",
         "jsx-a11y/click-events-have-key-events": "off",
-        "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
-        "react-hooks/exhaustive-deps": "error", // Checks effect dependencies,
+        "react-hooks/rules-of-hooks": "error",
+        "react/jsx-no-bind": "off",
+        // Checks rules of Hooks
+        "react-hooks/exhaustive-deps": "error",
+        // Checks effect dependencies,
         "no-param-reassign": "off",
         "no-undef": "off",
-        "implicit-arrow-linebreak": "warn",
-        "react/jsx-no-bind": "off",
-        "react/jsx-wrap-multilines": [
+        "react/no-array-index-key": "off",
+        "arrow-body-style": "off",
+        "ulbi-tv-plugin/path-checker": [
             "error",
             {
-                declaration: "parens",
-                assignment: "parens",
-                return: "parens",
-                arrow: "parens",
-                condition: "ignore",
-                logical: "ignore",
-                prop: "ignore",
+                alias: "@",
             },
         ],
+        "ulbi-tv-plugin/layer-imports": [
+            "error",
+            {
+                alias: "@",
+                ignoreImportPatterns: ["**/StoreProvider", "**/testing"],
+            },
+        ],
+        "ulbi-tv-plugin/public-api-imports": [
+            "error",
+            {
+                alias: "@",
+                testFilesPatterns: ["**/*.test.*", "**/*.story.*", "**/StoreDecorator.tsx"],
+            },
+        ],
+        "react/jsx-max-props-per-line": ["error", { maximum: 5 }],
+        "react/no-unstable-nested-components": "warn",
+        "react/button-has-type": "off",
         "no-control-regex": 0,
     },
     globals: {
@@ -89,6 +100,7 @@ module.exports = {
         {
             files: ["**/src/**/*.{test,stories}.{ts,tsx}"],
             rules: {
+                "i18next/no-literal-string": "off",
                 "max-len": "off",
             },
         },
