@@ -1,57 +1,55 @@
-import { useTranslation } from "react-i18next"
-import React, { memo, useCallback } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { classNames } from "@/shared/lib/classNames/classNames"
-import { Avatar } from "@/shared/ui/Avatar"
-import { Dropdown } from "@/shared/ui/Popups"
-import { getUserAuthData, isUserAdmin, isUserManager, userActions } from "@/entities/User"
-import { getRouteAdmin, getRouteProfile } from "@/shared/const/router"
+import { useTranslation } from 'react-i18next';
+import React, { memo, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { classNames } from '@/shared/lib/classNames/classNames';
+import { Avatar } from '@/shared/ui/Avatar';
+import { Dropdown } from '@/shared/ui/Popups';
+import {
+    getUserAuthData, isUserAdmin, isUserManager, userActions,
+} from '@/entities/User';
+import { getRouteAdmin, getRouteProfile } from '@/shared/const/router';
 
 interface AvatarDropdownProps {
-    className?: string
+    className?: string;
 }
 
 export const AvatarDropdown = memo((props: AvatarDropdownProps) => {
-    const { className } = props
-    const { t } = useTranslation()
-    const dispatch = useDispatch()
-    const isAdmin = useSelector(isUserAdmin)
-    const isManager = useSelector(isUserManager)
-    const authData = useSelector(getUserAuthData)
+    const { className } = props;
+    const { t } = useTranslation();
+    const dispatch = useDispatch();
+    const isAdmin = useSelector(isUserAdmin);
+    const isManager = useSelector(isUserManager);
+    const authData = useSelector(getUserAuthData);
 
     const onLogout = useCallback(() => {
-        dispatch(userActions.logout())
-    }, [dispatch])
+        dispatch(userActions.logout());
+    }, [dispatch]);
 
-    const isAdminPanelAvailable = isAdmin || isManager
+    const isAdminPanelAvailable = isAdmin || isManager;
 
     if (!authData) {
-        return null
+        return null;
     }
 
     return (
         <Dropdown
             direction="bottom left"
-            className={classNames("", {}, [className])}
+            className={classNames('', {}, [className])}
             items={[
-                ...(isAdminPanelAvailable
-                    ? [
-                          {
-                              content: t("Админка"),
-                              href: getRouteAdmin(),
-                          },
-                      ]
-                    : []),
+                ...(isAdminPanelAvailable ? [{
+                    content: t('Админка'),
+                    href: getRouteAdmin(),
+                }] : []),
                 {
-                    content: t("Профиль"),
+                    content: t('Профиль'),
                     href: getRouteProfile(authData.id),
                 },
                 {
-                    content: t("Выйти"),
+                    content: t('Выйти'),
                     onClick: onLogout,
                 },
             ]}
             trigger={<Avatar fallbackInverted size={30} src={authData.avatar} />}
         />
-    )
-})
+    );
+});
