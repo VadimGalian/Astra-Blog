@@ -23,7 +23,8 @@ describe("User open article details page", () => {
         cy.addComment("text")
         cy.getByTestId("AddCommentForm").should("have.length", 1)
     })
-    it("rate article", () => {
+    it("rate article (with stub data)", () => {
+        cy.intercept("GET", "**/articles/*", { fixture: "article-details.json" })
         cy.getByTestId("ArticleDetails.info")
         cy.getByTestId("RatingCard").scrollIntoView()
         cy.setRate(5, "feedback")
