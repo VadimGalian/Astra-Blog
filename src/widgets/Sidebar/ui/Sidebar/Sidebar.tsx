@@ -1,35 +1,39 @@
-import { memo, useMemo, useState } from "react"
-import { useSelector } from "react-redux"
-import { classNames } from "@/shared/lib/classNames/classNames"
-import { ThemeSwitcher } from "@/features/ThemeSwitcher"
-import { LangSwitcher } from "@/features/LangSwitcher"
-import { Button, ButtonSize, ButtonTheme } from "@/shared/ui/Button"
-import { VStack } from "@/shared/ui/Stack"
-import cls from "./Sidebar.module.scss"
-import { SidebarItem } from "../SidebarItem/SidebarItem"
-import { getSidebarItems } from "../../model/selectors/getSidebarItems"
-import { ToggleFeatures } from "@/shared/lib/features"
-import { AppLogo } from "@/shared/ui/AppLogo"
+import { memo, useMemo, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { classNames } from '@/shared/lib/classNames/classNames';
+import { ThemeSwitcher } from '@/features/ThemeSwitcher';
+import { LangSwitcher } from '@/features/LangSwitcher';
+import { Button, ButtonSize, ButtonTheme } from '@/shared/ui/deprecated/Button';
+import { VStack } from '@/shared/ui/deprecated/Stack';
+import cls from './Sidebar.module.scss';
+import { SidebarItem } from '../SidebarItem/SidebarItem';
+import { getSidebarItems } from '../../model/selectors/getSidebarItems';
+import { ToggleFeatures } from '@/shared/lib/features';
+import { AppLogo } from '@/shared/ui/deprecated/AppLogo';
 
 interface SidebarProps {
-    className?: string
+    className?: string;
 }
 
 export const Sidebar = memo(({ className }: SidebarProps) => {
-    const [collapsed, setCollapsed] = useState(false)
-    const sidebarItemsList = useSelector(getSidebarItems)
+    const [collapsed, setCollapsed] = useState(false);
+    const sidebarItemsList = useSelector(getSidebarItems);
 
     const onToggle = () => {
-        setCollapsed(prev => !prev)
-    }
+        setCollapsed((prev) => !prev);
+    };
 
     const itemsList = useMemo(
         () =>
-            sidebarItemsList.map(item => (
-                <SidebarItem item={item} collapsed={collapsed} key={item.path} />
+            sidebarItemsList.map((item) => (
+                <SidebarItem
+                    item={item}
+                    collapsed={collapsed}
+                    key={item.path}
+                />
             )),
-        [collapsed, sidebarItemsList]
-    )
+        [collapsed, sidebarItemsList],
+    );
 
     return (
         <ToggleFeatures
@@ -37,9 +41,11 @@ export const Sidebar = memo(({ className }: SidebarProps) => {
             on={
                 <aside
                     data-testid="sidebar"
-                    className={classNames(cls.SidebarRedesigned, { [cls.collapsed]: collapsed }, [
-                        className,
-                    ])}
+                    className={classNames(
+                        cls.SidebarRedesigned,
+                        { [cls.collapsed]: collapsed },
+                        [className],
+                    )}
                 >
                     <AppLogo className={cls.appLogo} />
                 </aside>
@@ -47,7 +53,11 @@ export const Sidebar = memo(({ className }: SidebarProps) => {
             off={
                 <aside
                     data-testid="sidebar"
-                    className={classNames(cls.Sidebar, { [cls.collapsed]: collapsed }, [className])}
+                    className={classNames(
+                        cls.Sidebar,
+                        { [cls.collapsed]: collapsed },
+                        [className],
+                    )}
                 >
                     <Button
                         data-testid="sidebar-toggle"
@@ -57,7 +67,7 @@ export const Sidebar = memo(({ className }: SidebarProps) => {
                         size={ButtonSize.L}
                         square
                     >
-                        {collapsed ? ">" : "<"}
+                        {collapsed ? '>' : '<'}
                     </Button>
                     <VStack role="navigation" gap="8" className={cls.items}>
                         {itemsList}
@@ -69,5 +79,5 @@ export const Sidebar = memo(({ className }: SidebarProps) => {
                 </aside>
             }
         />
-    )
-})
+    );
+});
