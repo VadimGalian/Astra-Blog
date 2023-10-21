@@ -1,23 +1,27 @@
-let profileId: string
+let profileId = '';
 
-describe("User Open profile page", () => {
+describe('Пользователь заходит на страницу профиля', () => {
     beforeEach(() => {
-        cy.login().then(data => {
-            profileId = data.id
-            cy.visit(`profile/${data.id}`)
-        })
-    })
+        cy.visit('');
+        cy.login().then((data) => {
+            profileId = data.id;
+            cy.visit(`profile/${data.id}`);
+        });
+    });
     afterEach(() => {
-        cy.resetProfile(profileId)
-    })
-    it("Profile card loading success", () => {
-        cy.getByTestId("ProfileCard.firstname").should("have.value", "Cypress test")
-    })
-    it("Editiing profile card", () => {
-        const newName = "cypress"
-        const lastName = "the best"
-        cy.updateProfile(newName, lastName)
-        cy.getByTestId("ProfileCard.firstname").should("have.value", newName)
-        cy.getByTestId("ProfileCard.lastname").should("have.value", lastName)
-    })
-})
+        cy.resetProfile(profileId);
+    });
+    it('И профиль успешно загружается', () => {
+        cy.getByTestId('ProfileCard.firstname').should('have.value', 'test');
+    });
+    it('И редактирует его', () => {
+        const newName = 'new';
+        const newLastname = 'lastname';
+        cy.updateProfile(newName, newLastname);
+        cy.getByTestId('ProfileCard.firstname').should('have.value', newName);
+        cy.getByTestId('ProfileCard.lastname').should(
+            'have.value',
+            newLastname,
+        );
+    });
+});

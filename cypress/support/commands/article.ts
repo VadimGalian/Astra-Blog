@@ -1,41 +1,42 @@
-import { Article } from "../../../src/entities/Article"
+import { Article } from '../../../src/entities/Article';
 
 const defaultArticle = {
-    id: "121",
-    title: "Научная статья - Биология",
-    subtitle: "БиологиЯ",
-    img: "https://avatars.mds.yandex.net/get-zen_doc/2746556/pub_5f50dd7e1a1ddf4776aa5569_5f50decd2506f211d1de6284/scale_1200",
+    title: 'TESTING ARTICLE',
+    subtitle: 'БиологиЯ',
+    img:
+        'https://avatars.mds.yandex.net/get-zen_doc/2746556/pub_5f50dd' +
+        '7e1a1ddf4776aa5569_5f50decd2506f211d1de6284/scale_1200',
     views: 1022,
-    createdAt: "26.02.2022",
-    userId: "1",
-    type: ["SCIENCE"],
+    createdAt: '26.02.2022',
+    userId: '1',
+    type: ['SCIENCE'],
     blocks: [],
-}
+};
 
-export function createArticle(article?: Article) {
+export const createArticle = (article?: Article) => {
     return cy
         .request({
-            method: "POST",
-            url: `http://localhost:8000/articles`,
-            headers: { authorization: "asassa" },
+            method: 'POST',
+            url: 'http://localhost:8000/articles',
+            headers: { Authorization: 'asasf' },
             body: article ?? defaultArticle,
         })
-        .then(resp => resp.body)
-}
+        .then((resp) => resp.body);
+};
 
-export function removeArticle(articleId: string) {
+export const removeArticle = (articleId: string) => {
     return cy.request({
-        method: "DELETE",
+        method: 'DELETE',
         url: `http://localhost:8000/articles/${articleId}`,
-        headers: { authorization: "asassa" },
-    })
-}
+        headers: { Authorization: 'asasf' },
+    });
+};
 
 declare global {
     namespace Cypress {
         interface Chainable {
-            createArticle(article?: Article): Chainable<Article>
-            removeArticle(articleId: string): Chainable<void>
+            createArticle(article?: Article): Chainable<Article>;
+            removeArticle(articleId: string): Chainable<void>;
         }
     }
 }

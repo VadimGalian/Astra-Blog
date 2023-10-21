@@ -9,8 +9,9 @@
         "start:dev": "concurrently \"npm start\" \"npm run start:dev:server\"",
         "start:dev:vite": "concurrently \"npm run start:vite\" \"npm run start:dev:server\"",
         "start:dev:server": "node ./json-server/index.js",
-        "build:prod": "webpack  --env mode=production apiUrl=https://production-project-server.vercel.app",
+        "build:prod": "webpack  --env mode=production",
         "build:dev": "webpack  --env mode=development",
+        "prettier": "npx prettier --write **/*.{ts,tsx,json}",
         "lint:ts": "eslint \"**/*.{ts,tsx}\"",
         "lint:ts:fix": "eslint \"**/*.{ts,tsx}\" --fix",
         "lint:scss": "npx stylelint \"**/*.scss\"",
@@ -27,10 +28,14 @@
         "storybook:build": "build-storybook -c ./config/storybook",
         "prepare": "husky install",
         "generate:slice": "node ./scripts/createSlice/index.js",
-        "postinstall": "node ./scripts/clear-cache.js"
+        "postinstall": "node ./scripts/clear-cache.js",
+        "remove-feature": "ts-node ./scripts/remove-feature.ts"
     },
     "lint-staged": {
-        "**/*.{ts,tsx}": "eslint"
+        "**/*.{ts,tsx}": [
+            "prettier --list-different",
+            "eslint"
+        ]
     },
     "keywords": [],
     "author": "",
@@ -76,13 +81,14 @@
         "cypress": "^11.0.0",
         "eslint": "^8.10.0",
         "eslint-config-airbnb": "^19.0.4",
+        "eslint-config-prettier": "^8.5.0",
         "eslint-plugin-i18next": "^5.1.2",
         "eslint-plugin-import": "^2.25.4",
         "eslint-plugin-jsx-a11y": "^6.5.1",
         "eslint-plugin-react": "^7.29.2",
         "eslint-plugin-react-hooks": "^4.3.0",
         "eslint-plugin-storybook": "^0.6.7",
-        "eslint-plugin-ulbi-tv-plugin": "^0.0.9",
+        "eslint-plugin-ulbi-tv-plugin": "^0.0.10",
         "eslint-plugin-unused-imports": "^2.0.0",
         "file-loader": "^6.2.0",
         "fork-ts-checker-webpack-plugin": "^7.2.13",
@@ -95,6 +101,7 @@
         "lint-staged": "^13.0.3",
         "loki": "^0.28.1",
         "mini-css-extract-plugin": "^2.5.3",
+        "prettier": "2.7.1",
         "react-refresh": "^0.12.0",
         "reg-cli": "^0.17.6",
         "regenerator-runtime": "^0.13.9",
