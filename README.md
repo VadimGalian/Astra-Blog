@@ -153,7 +153,7 @@ In the `scripts` folder, you can find various scripts for refactoring, simplifyi
 
 ---
 
-## CI pipeline и pre commit hooks
+## CI pipeline and pre commit hooks
 
 "The GitHub Actions configuration is located in /.github/workflows.
 In the CI (Continuous Integration) process, all types of tests are run, the project is built, Storybook and linters.
