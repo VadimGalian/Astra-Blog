@@ -20,33 +20,33 @@ export enum ButtonSize {
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     className?: string;
     /**
-     * Тема кнопки. Отвечает за визуал (в рамке, без стилей, противоположный теме приложения цвет и тд)
+     * Button theme. Responsible for the visuals (within a frame, without styles, a color opposite to the app theme, etc.).
      */
     theme?: ButtonTheme;
     /**
-     * Флаг, делающий кнопку квадратной
+     * A flag that makes the button square.
      */
     square?: boolean;
     /**
-     * Размер кнопки в соответствии с дизайн системой
+     * Button size in accordance with the design system.
      */
     size?: ButtonSize;
     /**
-     * Флаг, отвечающий за работу кнопки
+     * A flag responsible for the button's operation.
      */
     disabled?: boolean;
     /**
-     * Содержимое кнопки
+     * Button content.
      */
     children?: ReactNode;
     /**
-     * Увеличивает кнопку на всю свободную ширину
+     * Expands the button to the full available width.
      */
     fullWidth?: boolean;
 }
 
 /**
- * Устарел, используем новые компоненты из папки redesigned
+ * Deprecated, use new components from the 'redesigned' folder.
  * @deprecated
  */
 export const Button = memo((props: ButtonProps) => {

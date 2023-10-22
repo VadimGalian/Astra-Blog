@@ -7,21 +7,21 @@ const toggleFunctionName = 'toggleFeatures';
 const toggleComponentName = 'ToggleFeatures';
 
 if (!removedFeatureName) {
-    throw new Error('Укажите название фича-флага');
+    throw new Error('Specify the feature flag name.');
 }
 
 if (!featureState) {
-    throw new Error('Укажите состояние фичи (on или off)');
+    throw new Error('Specify the feature state (on or off).');
 }
 
 if (featureState !== 'on' && featureState !== 'off') {
-    throw new Error('Некорректное значение состояния фичи (on или off)');
+    throw new Error('Invalid feature state value (on or off).');
 }
 
 const project = new Project({});
 
-project.addSourceFilesAtPaths('src/**/ArticleDetailsPage.ts');
-project.addSourceFilesAtPaths('src/**/ArticleDetailsPage.tsx');
+project.addSourceFilesAtPaths('src/**/*.ts');
+project.addSourceFilesAtPaths('src/**/*.tsx');
 
 const files = project.getSourceFiles();
 
@@ -127,16 +127,17 @@ const replaceComponent = (node: Node) => {
 };
 
 files.forEach((sourceFile) => {
+    // eslint-disable-next-line consistent-return
     sourceFile.forEachDescendant((node) => {
         if (node.isKind(SyntaxKind.CallExpression) && isToggleFunction(node)) {
-            replaceToggleFunction(node);
+            return replaceToggleFunction(node);
         }
 
         if (
             node.isKind(SyntaxKind.JsxSelfClosingElement) &&
             isToggleComponent(node)
         ) {
-            replaceComponent(node);
+            return replaceComponent(node);
         }
     });
 });

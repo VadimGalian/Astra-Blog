@@ -1,21 +1,21 @@
-describe('Пользователь заходит на страницу со списком статей', () => {
+describe('The user visits the page with a list of articles.', () => {
     beforeEach(() => {
         cy.login().then((data) => {
             cy.visit('articles');
         });
     });
-    it('и статьи успешно подгружаются', () => {
+    it('and the articles are successfully loaded.', () => {
         cy.getByTestId('ArticleList').should('exist');
         cy.getByTestId('ArticleListItem').should('have.length.greaterThan', 3);
     });
 
-    it('На стабах (фикстурах)', () => {
+    it('On stubs (fixtures).', () => {
         cy.intercept('GET', '**/articles?*', { fixture: 'articles.json' });
         cy.getByTestId('ArticleList').should('exist');
         cy.getByTestId('ArticleListItem').should('have.length.greaterThan', 3);
     });
 
-    it.skip('Пример заскипанного теста', () => {
+    it.skip('Example of a skipped test.', () => {
         cy.getByTestId('ArticleList').should('exist');
         cy.getByTestId('ArticleListItem').should('have.length.greaterThan', 3);
         cy.get('asfasf').should('exist');

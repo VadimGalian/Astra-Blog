@@ -9,7 +9,7 @@ import {
 import { UserRole } from '@/entities/User';
 
 describe('app/router/AppRouter', () => {
-    test('Страница должна отрендериться', async () => {
+    test('The page should render.', async () => {
         componentRender(<AppRouter />, {
             route: getRouteAbout(),
         });
@@ -18,7 +18,7 @@ describe('app/router/AppRouter', () => {
         expect(page).toBeInTheDocument();
     });
 
-    test('Страница не найдена', async () => {
+    test('Page not found.', async () => {
         componentRender(<AppRouter />, {
             route: '/asfasfasfasf',
         });
@@ -27,7 +27,7 @@ describe('app/router/AppRouter', () => {
         expect(page).toBeInTheDocument();
     });
 
-    test('Редирект неавторизованного пользователя на главную', async () => {
+    test('Redirect of an unauthorized user to the main page.', async () => {
         componentRender(<AppRouter />, {
             route: getRouteProfile('1'),
         });
@@ -36,7 +36,7 @@ describe('app/router/AppRouter', () => {
         expect(page).toBeInTheDocument();
     });
 
-    test('Доступ к закрытой страницы для авторизованного пользователя', async () => {
+    test('Access to the restricted page for an authorized user.', async () => {
         componentRender(<AppRouter />, {
             route: getRouteProfile('1'),
             initialState: {
@@ -48,7 +48,7 @@ describe('app/router/AppRouter', () => {
         expect(page).toBeInTheDocument();
     });
 
-    test('Доступ запрещен (отсутствует роль)', async () => {
+    test('Access denied (role missing).', async () => {
         componentRender(<AppRouter />, {
             route: getRouteAdmin(),
             initialState: {
@@ -60,7 +60,7 @@ describe('app/router/AppRouter', () => {
         expect(page).toBeInTheDocument();
     });
 
-    test('Доступ разрешен (присутствует роль)', async () => {
+    test('Access granted (role present).', async () => {
         componentRender(<AppRouter />, {
             route: getRouteAdmin(),
             initialState: {

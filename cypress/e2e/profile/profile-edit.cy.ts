@@ -1,6 +1,6 @@
 let profileId = '';
 
-describe('Пользователь заходит на страницу профиля', () => {
+describe('The user visits the profile page.', () => {
     beforeEach(() => {
         cy.visit('');
         cy.login().then((data) => {
@@ -11,10 +11,10 @@ describe('Пользователь заходит на страницу проф
     afterEach(() => {
         cy.resetProfile(profileId);
     });
-    it('И профиль успешно загружается', () => {
+    it('And the profile successfully loads.', () => {
         cy.getByTestId('ProfileCard.firstname').should('have.value', 'test');
     });
-    it('И редактирует его', () => {
+    it('And edits it.', () => {
         const newName = 'new';
         const newLastname = 'lastname';
         cy.updateProfile(newName, newLastname);

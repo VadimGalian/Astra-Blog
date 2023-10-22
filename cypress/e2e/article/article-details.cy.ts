@@ -1,5 +1,5 @@
 let currentArticleId = '';
-describe('Пользователь заходит на страницу статьи', () => {
+describe('The user visits the article page.', () => {
     beforeEach(() => {
         cy.login();
         cy.createArticle().then((article) => {
@@ -10,25 +10,25 @@ describe('Пользователь заходит на страницу стат
     afterEach(() => {
         cy.removeArticle(currentArticleId);
     });
-    it('И видит содержимое статьи', () => {
+    it('And sees the content of the article.', () => {
         cy.getByTestId('ArticleDetails.Info').should('exist');
     });
-    it('И видит список рекоммендаций', () => {
+    it('And sees a list of recommendations.', () => {
         cy.getByTestId('ArticleRecommendationsList').should('exist');
     });
-    it('И оставляет комментарий', () => {
+    it('And leaves a comment.', () => {
         cy.getByTestId('ArticleDetails.Info');
         cy.getByTestId('AddCommentForm').scrollIntoView();
         cy.addComment('text');
         cy.getByTestId('CommentCard.Content').should('have.length', 1);
     });
-    it('И ставит оценку', () => {
+    it('And gives a rating.', () => {
         cy.getByTestId('ArticleDetails.Info');
         cy.getByTestId('RatingCard').scrollIntoView();
         cy.setRate(4, 'feedback');
         cy.get('[data-selected=true]').should('have.length', 4);
     });
-    it('И ставит оценку (пример с стабом на фикстурах)', () => {
+    it('And gives a rating (example with a stub on fixtures).', () => {
         cy.intercept('GET', '**/articles/*', {
             fixture: 'article-details.json',
         });

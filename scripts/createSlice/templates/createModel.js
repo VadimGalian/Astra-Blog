@@ -14,7 +14,7 @@ module.exports = async (layer, sliceName) => {
             await fs.mkdir(resolveModelPath('selectors'));
             await fs.mkdir(resolveModelPath('services'));
         } catch (e) {
-            console.log(`Не удалось создать model сегмент для слайса ${sliceName}`, e);
+            console.log(`Failed to create a model segment for the slice ${sliceName}`, e);
         }
     };
 
@@ -25,7 +25,7 @@ module.exports = async (layer, sliceName) => {
                 reduxSliceTemplate(sliceName),
             );
         } catch (e) {
-            console.log('Не удалось создать редакс слайс', e);
+            console.log('Failed to create a Redux slice', e);
         }
     };
 
@@ -36,7 +36,7 @@ module.exports = async (layer, sliceName) => {
                 schemaTypeTemplate(sliceName),
             );
         } catch (e) {
-            console.log('Не удалось создать тип схемы стейта', e);
+            console.log('Failed to create a state schema type', e);
         }
     };
 
